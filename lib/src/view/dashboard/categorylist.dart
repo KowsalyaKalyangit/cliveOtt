@@ -71,11 +71,7 @@ class _CategorylistState extends State<Categorylist> {
               itemBuilder: (context, index) {
                 return InkWell(
                   focusColor: Colors.blue,
-                  onTap: () {
-                    Get.to(CategoryVideos(
-                      index: index,
-                    ));
-                  },
+                  onTap: () {},
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,19 +104,19 @@ class _CategorylistState extends State<Categorylist> {
 
         //2nd category
         Padding(
-          padding: const EdgeInsets.only(left: 5.0),
-          child: Container(
-            height: 30.0.h,
-            width: 1000.0.w,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Latest Movies',
-                  style: toptitleStylebold,
-                ),
-              ],
-            ),
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              Container(
+                height: 18.0.h,
+                width: 1.0.w,
+                color: Colors.red[900],
+              ),
+              SizedBox(
+                width: 5.0.w,
+              ),
+              Text('Latest Movies', style: toptitleStylebold),
+            ],
           ),
         ),
         SizedBox(

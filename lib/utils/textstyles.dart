@@ -26,10 +26,17 @@ final datetime = GoogleFonts.ibmPlexSans(
 final categoryitems = TextStyle(
   color: screenbackground,
 );
+final datetimecolor = GoogleFonts.ibmPlexSans(
+    textStyle: TextStyle(
+        letterSpacing: 0.2,
+        fontSize: 10.00,
+        color: screenbackground,
+        fontWeight: FontWeight.w800));
+
 final sixteenplus = GoogleFonts.ibmPlexSans(
     textStyle: TextStyle(
         letterSpacing: 0.2,
-        fontSize: 16.00,
+        fontSize: 10.00,
         color: Colors.red,
         fontWeight: FontWeight.w800));
 final categorytext = GoogleFonts.ibmPlexSans(

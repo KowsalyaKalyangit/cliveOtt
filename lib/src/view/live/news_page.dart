@@ -29,30 +29,33 @@ class _NewsPageState extends State<NewsPage> with TickerProviderStateMixin {
   Widget gridCard({required GridItem card}) => Container(
           child: Padding(
         padding: const EdgeInsets.all(5.0),
-        child: Column(children: [
-          Expanded(
-              child: InkWell(
-                  focusColor: Colors.blue,
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.circular(5),
-                      child: Image.asset(
-                        card.spaceImg,
-                      )))),
-          SizedBox(
-            height: 5.0.h,
-          ),
-          Row(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 5.0),
-                child: Text(
-                  card.spaceName,
-                  style: subcategorystyle,
-                ),
-              )
-            ],
-          ),
-        ]),
+              Expanded(
+                  child: InkWell(
+                      focusColor: Colors.blue,
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: Image.asset(
+                            card.spaceImg,
+                          )))),
+              SizedBox(
+                height: 5.0.h,
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5.0),
+                    child: Text(
+                      card.spaceName,
+                      style: toptitleStylebold,
+                    ),
+                  )
+                ],
+              ),
+            ]),
       ));
   @override
   void initState() {
@@ -61,24 +64,20 @@ class _NewsPageState extends State<NewsPage> with TickerProviderStateMixin {
 
   List<GridItem> card = [
     GridItem(
-      spaceImg: ('assets/category/thanthi.jpg'),
-      spaceName: 'Thanthi News',
+      spaceImg: ('assets/premium/54.jpg'),
+      spaceName: 'Enterr 10',
     ),
     GridItem(
-      spaceImg: ('assets/category/indiahead.jpg'),
-      spaceName: 'India Ahead',
+      spaceImg: ('assets/premium/55.jpg'),
+      spaceName: 'B4U Movies',
     ),
     GridItem(
-      spaceImg: ('assets/category/hornbilltv.jpg'),
-      spaceName: 'Horn Bill Tv',
+      spaceImg: ('assets/premium/56.jpg'),
+      spaceName: 'B4U Kadak',
     ),
     GridItem(
-      spaceImg: ('assets/category/8.jpg'),
-      spaceName: 'hdtv 24x7',
-    ),
-    GridItem(
-      spaceImg: ('assets/category/indiatoday.jpg'),
-      spaceName: 'India Today',
+      spaceImg: ('assets/premium/57.jpg'),
+      spaceName: 'Movie Opera',
     ),
   ];
   @override
@@ -87,10 +86,21 @@ class _NewsPageState extends State<NewsPage> with TickerProviderStateMixin {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          height: 40.0.h,
-          width: 150.0.w,
-          child: Text('News', style: categorystyle),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              Container(
+                height: 18.0.h,
+                width: 1.0.w,
+                color: Colors.red[900],
+              ),
+              SizedBox(
+                width: 5.0.w,
+              ),
+              Text('Movies', style: toptitleStylebold),
+            ],
+          ),
         ),
         Container(
           height: 150.h,
@@ -100,18 +110,21 @@ class _NewsPageState extends State<NewsPage> with TickerProviderStateMixin {
             // physics: NeverScrollableScrollPhysics(),
             itemCount: card.length,
             itemBuilder: (BuildContext context, index) {
-              return InkWell(
-                  focusColor: Colors.blue.withOpacity(0.4),
-                  onTap: () {
-                    Get.to(NewsLiveVideo(
-                      index: index,
-                      name: tvname[index],
-                    ));
-                    print('clickkkk');
-                  },
-                  child: gridCard(
-                    card: card[index],
-                  ));
+              return Material(
+                color: Colors.transparent,
+                child: InkWell(
+                    focusColor: Colors.blue.withOpacity(0.4),
+                    onTap: () {
+                      Get.to(NewsLiveVideo(
+                        index: index,
+                        name: tvname[index],
+                      ));
+                      print('clickkkk');
+                    },
+                    child: gridCard(
+                      card: card[index],
+                    )),
+              );
             },
           ),
         ),

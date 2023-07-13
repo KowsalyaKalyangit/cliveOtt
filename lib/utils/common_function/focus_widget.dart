@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../src/view/live/entertainment.dart';
+import '../../src/view/live/livetv_category/livetv_category.dart';
 
 class LeftButtonIntent extends Intent {}
 
@@ -75,7 +75,7 @@ class _FocusWidgetState extends State<FocusWidget> {
           ),
           child: TextButton(
             onPressed: () {
-              Get.to(EntertainmentPage(), arguments: {"imageUrl": widget.text});
+              //Get.to(EntertainmentPage(), arguments: {"imageUrl": widget.text});
             },
             child: Text(
               widget.text,

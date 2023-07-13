@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import 'entertainment.dart';
+import '../../controller/livetv_category_controller.dart';
+ 
 import 'lifesstyle/lifestyle_page.dart';
 import 'music_live.dart';
 import 'news_page.dart';
@@ -14,6 +16,14 @@ class LiveChannels extends StatefulWidget {
 }
 
 class _LiveChannelsState extends State<LiveChannels> {
+  LiveCategoryController liveTvCategoryController =
+      Get.put(LiveCategoryController());
+  @override
+  void initState() {
+    liveTvCategoryController.liveTvcategoryController();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -9,9 +9,10 @@ import 'package:get/get.dart';
 
 import '../../../utils/colors.dart';
 
+import '../dashboard/image_slider.dart';
 import '../dashboard/sliding_banner.dart';
 import '../login/login_page.dart';
-import 'entertainment.dart';
+
 import 'lifesstyle/lifestyle_page.dart';
 import 'live_channels_only.dart';
 
@@ -169,8 +170,8 @@ class _CliveTabsState extends State<CliveTabs> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CarouselDemo(),
-                      EntertainmentPage(),
+                      ImageSliderHome(),
+                      // EntertainmentPage(),
                       MusicLivePage(),
                       NewsPage(),
                       OthersPage()
@@ -185,7 +186,7 @@ class _CliveTabsState extends State<CliveTabs> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      EntertainmentPage(),
+                      // EntertainmentPage(),
                       MusicLivePage(),
                       NewsPage(),
                       LifeStylePage(),

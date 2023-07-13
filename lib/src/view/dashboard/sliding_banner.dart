@@ -1,114 +1,137 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:cliveott/src/view/dashboard/slider_videos.dart';
 import 'package:cliveott/utils/colors.dart';
+import 'package:cliveott/utils/responsive.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+import 'package:flutter/services.dart';
+import 'package:is_tv/is_tv.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 
-import '../subscribe/subscription_page.dart';
+class SlidingBannerAuto extends StatefulWidget {
+  const SlidingBannerAuto({Key? key}) : super(key: key);
 
-// final List<String> imgList = [
-//   'https://cherritech.us/ott/upload/source/6.png',
-//   'https://cherritech.us/ott/upload/source/2-slider.png',
-//   'https://cherritech.us/ott/upload/source/1.png',
-//   'https://cherritech.us/ott/upload/source/6.png',
-//   'https://cherritech.us/ott/upload/source/2-slider.png',
-//   'https://cherritech.us/ott/upload/source/1.png'
-// ];
-
-final List<String> imgList = [
-  'assets/category/rajini.jpg',
-  'assets/category/rajini1.jpg',
-  'assets/category/rajini2.jpg',
-  'assets/category/rajini3.jpg',
-  'assets/category/rajini4.jpg',
-  'assets/category/rajini5.jpg'
-];
-int _current = 0;
-var selectedindex = 0;
-final themeMode = ValueNotifier(2);
-
-class CarouselDemo extends StatefulWidget {
   @override
-  State<CarouselDemo> createState() => _CarouselDemoState();
+  State<StatefulWidget> createState() {
+    return _SlidingBannerAutoState();
+  }
 }
 
-class _CarouselDemoState extends State<CarouselDemo> {
-  CarouselController buttonCarouselController = CarouselController();
+class _SlidingBannerAutoState extends State<SlidingBannerAuto> {
+  int _current = 0;
+  final CarouselController _controller = CarouselController();
+  // CategoryController categoryController = Get.put(CategoryController());
+  @override
+  void initState() {
+    initPlatformState();
+    super.initState();
+  }
+
+  final List<String> imgList = [
+    'assets/category/rajini.jpg',
+    'assets/category/rajini1.jpg',
+    'assets/category/rajini2.jpg',
+    'assets/category/rajini3.jpg',
+    'assets/category/rajini4.jpg',
+    'assets/category/rajini5.jpg'
+  ];
+  // final List<String> imgList = [
+  //   'assets/slider/12.jpg',
+  //   'assets/slider/15.jpg',
+  //   'assets/slider/13.jpg',
+  //   'assets/slider/11.jpg',
+  //   'assets/slider/14.jpg'
+  // ];
+  bool? _isTV = false;
+  final _isTVPlugin = IsTV();
+
+  Future<void> initPlatformState() async {
+    bool? isTV;
+
+    try {
+      isTV = await _isTVPlugin.check() ?? false;
+    } on PlatformException {
+      isTV = false;
+    }
+
+    if (!mounted) return;
+
+    setState(() {
+      _isTV = isTV ?? false;
+    });
+  }
+
+  final CarouselController carouselController = CarouselController();
 
   @override
-  Widget build(BuildContext context) => Column(children: <Widget>[
-        CarouselSlider(
-          items: imgList.map((i) {
-            return Builder(
-              builder: (BuildContext context) {
-                return InkWell(
-                  focusColor: Colors.red,
-                  onTap: () {
-                    Get.to(SliderVideos(
-                      index: selectedindex,
-                    ));
+  Widget build(BuildContext context) {
+    // var imgList = categoryController.getcategory[0].data!.bannerImage![0].bannerUrl;
 
-                    // Get.to(SubscriptionPage());
-                  },
-                  child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.symmetric(horizontal: 5.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Container(
-                          child: Image.asset(
-                            i,
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      )),
-                );
-              },
-            );
-          }).toList(),
-          options: CarouselOptions(
-            height: 320.0.h,
-            aspectRatio: 16 / 9,
-            viewportFraction: 0.6,
-            initialPage: 0,
-            enableInfiniteScroll: true,
-            reverse: false,
-            autoPlay: true,
-            autoPlayInterval: Duration(seconds: 3),
-            autoPlayAnimationDuration: Duration(milliseconds: 800),
-            autoPlayCurve: Curves.fastOutSlowIn,
-            enlargeCenterPage: true,
-            enlargeFactor: 0.2,
-            scrollDirection: Axis.horizontal,
-            onPageChanged: (index, reason) {
-              setState(() {
-                selectedindex = index;
-              });
+    final List<Widget> imageSliders = imgList
+        .map((item) => ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: Image.asset(
+                item,
+                fit: BoxFit.fill,
+                width: MediaQuery.of(context).size.width * 1,
+                height: MediaQuery.of(context).size.height * 0.2,
+              ),
+            ))
+        .toList();
+    return Container(
+      height: _isTV! ? 65.0.hp : 30.0.hp,
+      //color: Colors.black.withOpacity(0.2),
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        Material(
+          color: Colors.transparent,
+          child: IconButton(
+            focusColor: Colors.red,
+            onPressed: () {
+              carouselController.previousPage(
+                  duration: const Duration(milliseconds: 1),
+                  curve: Curves.linear);
             },
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: Colors.grey,
+            ),
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: imgList.asMap().entries.map((entry) {
-            return GestureDetector(
-                onTap: () => buttonCarouselController.animateToPage(entry.key),
-                child: Container(
-                  width: 10.00.h,
-                  height: 10.00.w,
-                  margin: EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: (Theme.of(context).brightness == Brightness.dark
-                              ? Colors.black
-                              : Colors.black)
-                          .withOpacity(selectedindex == entry.key ? 0.9 : 0.4)
-                      // color: selectedindex == entry.key
-                      //     ? Colors.grey
-                      //     : Colors.black),
-                      ),
-                ));
-          }).toList(),
+        Expanded(
+            child: CarouselSlider(
+          items: imageSliders,
+          carouselController: carouselController,
+
+          //Slider Container properties
+          options: CarouselOptions(
+              height: _isTV! ? 400.0 : 180,
+              enlargeCenterPage: true,
+              autoPlay: true,
+              aspectRatio: _isTV! ? 16 / 9 : 4 / 3,
+              autoPlayCurve: Curves.fastOutSlowIn,
+              enableInfiniteScroll: true,
+              autoPlayAnimationDuration: Duration(milliseconds: 800),
+              viewportFraction: 0.8,
+              onPageChanged: (index, reason) {
+                setState(() {
+                  _current = index;
+                });
+              }),
+        )),
+        Material(
+          color: Colors.transparent,
+          child: IconButton(
+            focusColor: Colors.red,
+            onPressed: () {
+              carouselController.nextPage(
+                  duration: const Duration(milliseconds: 1),
+                  curve: Curves.linear);
+            },
+            icon: const Icon(
+              Icons.arrow_forward_ios_sharp,
+              color: Colors.grey,
+            ),
+          ),
         ),
-      ]);
+      ]),
+    );
+  }
 }

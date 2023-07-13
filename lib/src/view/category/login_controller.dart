@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../live/clive_tabs.dart';
 
-class LoginController extends GetxController {
+class LoginControllerss extends GetxController {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final loginFormKey = GlobalKey<FormState>();

@@ -18,7 +18,7 @@ class Helper {
           msg: "Tap again to leave",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
-          backgroundColor: Colors.grey,
+          backgroundColor: Colors.red,
           textColor: Colors.white,
           fontSize: 16.0);
       return Future.value(false);

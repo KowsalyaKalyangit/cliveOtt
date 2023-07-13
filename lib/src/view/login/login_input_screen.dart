@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../utils/colors.dart';
-import '../category/login_controller.dart';
+import '../../controller/login_controller.dart';
 
 class LoginInputFields extends StatefulWidget {
   const LoginInputFields({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class LoginInputFields extends StatefulWidget {
 
 class _LoginInputFieldsState extends State<LoginInputFields> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  LoginController controller = Get.put(LoginController());
+  LoginController loginController = Get.put(LoginController());
 
   bool _isPinnewHidden = true;
   bool select = true;
@@ -29,10 +29,11 @@ class _LoginInputFieldsState extends State<LoginInputFields> {
     });
   }
 
+  final ValueNotifier<bool> isEnabled = ValueNotifier(false);
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: controller.loginFormKey,
+      key: formKey,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -46,7 +47,7 @@ class _LoginInputFieldsState extends State<LoginInputFields> {
             child: TextFormField(
               textInputAction: TextInputAction.next,
               style: toptitleStyle,
-              controller: controller.emailController,
+              controller: loginController.email,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
@@ -80,8 +81,7 @@ class _LoginInputFieldsState extends State<LoginInputFields> {
             width: 200.00.w,
             child: TextFormField(
               textInputAction: TextInputAction.next,
-              keyboardType: TextInputType.number,
-              controller: controller.passwordController,
+              controller: loginController.password,
               obscureText: _isPinnewHidden,
               style: toptitleStyle,
               decoration: InputDecoration(
@@ -96,22 +96,25 @@ class _LoginInputFieldsState extends State<LoginInputFields> {
                         color: const Color(0xffC6C6C6).withOpacity(0.5),
                         width: 1),
                   ),
-                  suffixIcon: InkWell(
-                    onTap: () {
-                      _togglecnewPinView();
-                    },
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(top: 15, left: 5, bottom: 15),
-                      child: Icon(
-                        _isPinnewHidden
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                        size: MediaQuery.of(context).size.height * 0.025,
-                        color: screenbackground,
-                      ),
-                    ),
-                  ),
+                  // suffixIcon: InkWell(
+                  //   focusColor: Colors.red,
+                  //   onTap: () {
+                  //     setState(() {
+                  //       _togglecnewPinView();
+                  //     });
+                  //   },
+                  //   child: Padding(
+                  //     padding:
+                  //         const EdgeInsets.only(top: 15, left: 5, bottom: 15),
+                  //     child: Icon(
+                  //       _isPinnewHidden
+                  //           ? Icons.visibility
+                  //           : Icons.visibility_off,
+                  //       size: MediaQuery.of(context).size.height * 0.025,
+                  //       color: screenbackground,
+                  //     ),
+                  //   ),
+                  // ),
                   fillColor: const Color(0xffC6C6C6),
                   hintText: 'Password',
                   contentPadding: const EdgeInsets.only(left: 10),
@@ -119,6 +122,35 @@ class _LoginInputFieldsState extends State<LoginInputFields> {
                   border: const OutlineInputBorder(
                     gapPadding: 4,
                   )),
+            ),
+          ),
+          SizedBox(
+            height: 20.0.h,
+          ),
+          Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: () {
+                loginController.loginController(context: context);
+                print('printtttt');
+              },
+              focusColor: Colors.red.withOpacity(0.2),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 35.0.h,
+                  width: 100.0.w,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.red),
+                  child: Center(
+                    child: Text(
+                      'Login',
+                      style: toptitleStylebold,
+                    ),
+                  ),
+                ),
+              ),
             ),
           ),
           // Padding(
@@ -203,24 +235,6 @@ class _LoginInputFieldsState extends State<LoginInputFields> {
           //   height: 10.0.h,
           // ),
 
-          // InkWell(
-          //   onTap: () {
-          //     controller.login();
-          //   },
-          //   focusColor: Colors.yellow,
-          //   child: Container(
-          //     height: 35.0.h,
-          //     width: 100.0.w,
-          //     decoration: BoxDecoration(
-          //         borderRadius: BorderRadius.circular(10), color: Colors.red),
-          //     child: Center(
-          //       child: Text(
-          //         'Login',
-          //         style: toptitleStylebold,
-          //       ),
-          //     ),
-          //   ),
-          // ),
           // Container(
           //   height: 60.0.h,
           //   width: 500.w,
@@ -247,6 +261,21 @@ class _LoginInputFieldsState extends State<LoginInputFields> {
           //     ],
           //   ),
           // )
+          SizedBox(
+            height: 25.0.h,
+          ),
+          // ValueListenableBuilder<bool>(
+          //   valueListenable: isEnabled,
+          //   builder: (context, value, child) {
+          //     return ElevatedButton(
+          //         style: ButtonStyle(),
+          //         onPressed: () {
+          //           print('errrr');
+          //         },
+          //         child: Container(
+          //             height: 40.00.h, width: 10.00.w, child: Text("Login")));
+          //   },
+          // ),
         ],
       ),
     );

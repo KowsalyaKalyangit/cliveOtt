@@ -4,12 +4,15 @@ import 'package:cliveott/utils/textstyles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:video_player/video_player.dart';
 
 import '../../../utils/colors.dart';
 import '../../../utils/landscape.dart';
 import '../category/category_content.dart';
+import 'package:flutter/services.dart';
+import 'package:is_tv/is_tv.dart';
 
 class SliderVideos extends StatefulWidget {
   SliderVideos({
@@ -43,8 +46,25 @@ class _SliderVideosState extends State<SliderVideos> {
     'assets/videos/video2.mp4',
     'assets/videos/video1.mp4',
   ];
+  bool? _isTV;
+  final _isTVPlugin = IsTV();
   int _buttonClickCount = 0;
   bool _showWidget = false;
+  Future<void> initPlatformState() async {
+    bool? isTV;
+
+    try {
+      isTV = await _isTVPlugin.check() ?? false;
+    } on PlatformException {
+      isTV = false;
+    }
+
+    if (!mounted) return;
+
+    setState(() {
+      _isTV = isTV ?? false;
+    });
+  }
 
   void _handleButtonClick() {
     setState(() {
@@ -63,6 +83,7 @@ class _SliderVideosState extends State<SliderVideos> {
   @override
   void initState() {
     super.initState();
+    initPlatformState();
 
     _controller = VideoPlayerController.network(url[widget.index!])
       ..initialize().then((_) {
@@ -100,7 +121,7 @@ class _SliderVideosState extends State<SliderVideos> {
             Center(
               child: _controller!.value.isInitialized
                   ? AspectRatio(
-                      aspectRatio: 18 / 9,
+                      aspectRatio: _isTV == true ? 18 / 9 : 9 / 16,
                       child: InkWell(
                           focusColor: Colors.blue,
                           onTap: () {
@@ -144,7 +165,7 @@ class _SliderVideosState extends State<SliderVideos> {
                 ? Padding(
                     padding: const EdgeInsets.only(left: 20.0, right: 20),
                     child: Container(
-                      // height: 100.h,
+                      //   height: 100.h,
                       width: 1000.0.w,
                       decoration: BoxDecoration(
                           color: Color.fromARGB(255, 241, 234, 234)

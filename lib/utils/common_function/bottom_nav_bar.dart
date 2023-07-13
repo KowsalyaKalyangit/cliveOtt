@@ -75,7 +75,7 @@ class BottomNavyBar extends StatelessWidget {
       child: Container(
         width: 95.00.wp,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: black1,
           borderRadius: BorderRadius.circular(30),
           boxShadow: [
             if (showElevation)
@@ -91,7 +91,7 @@ class BottomNavyBar extends StatelessWidget {
             //  decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
             padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
             child: Row(
-              mainAxisAlignment: mainAxisAlignment,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: items.map((item) {
                 var index = items.indexOf(item);
                 return GestureDetector(
@@ -148,7 +148,7 @@ class _ItemWidget extends StatelessWidget {
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: isSelected
-                    ? Colors.red
+                    ? Colors.white
                     : const Color(0xffD9D9D9).withOpacity(0.2),
                 // color: const Color(0xffD9D9D9).withOpacity(0.2),
                 border: Border.all(color: appcolor.withOpacity(0.4))),
@@ -158,8 +158,8 @@ class _ItemWidget extends StatelessWidget {
                 data: IconThemeData(
                   size: iconSize,
                   color: isSelected
-                      ? Colors.white
-                      : item.inactiveColor == null
+                      ? Colors.black
+                      : item.inactiveColor != null
                           ? item.activeColor
                           : Colors.white,
                 ),

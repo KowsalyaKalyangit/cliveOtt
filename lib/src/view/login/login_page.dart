@@ -1,13 +1,11 @@
-import 'dart:ffi';
 import 'dart:ui';
 
-import 'package:cliveott/src/view/category/login_controller.dart';
 import 'package:cliveott/utils/textstyles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../utils/colors.dart';
+import '../../controller/login_controller.dart';
 import 'login_input_screen.dart';
 
 class LoginPage extends StatefulWidget {
@@ -83,28 +81,6 @@ class _LoginPageState extends State<LoginPage> {
                                 height: 20.0.h,
                               ),
                               LoginInputFields(),
-                              InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    print('clickkkkk');
-                                    controller.login();
-                                  });
-                                },
-                                focusColor: Colors.yellow,
-                                child: Container(
-                                  height: 35.0.h,
-                                  width: 100.0.w,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Colors.red),
-                                  child: Center(
-                                    child: Text(
-                                      'Login',
-                                      style: toptitleStylebold,
-                                    ),
-                                  ),
-                                ),
-                              ),
                               SizedBox(
                                 height: 20.0.h,
                               ),

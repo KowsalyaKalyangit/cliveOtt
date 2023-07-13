@@ -2,6 +2,7 @@ import 'package:cliveott/src/view/live/music/music_videos.dart';
 import 'package:cliveott/src/view/live/premium/premium_video.dart';
 
 import 'package:cliveott/utils/colors.dart';
+import 'package:cliveott/utils/responsive.dart';
 
 import 'package:cliveott/utils/textstyles.dart';
 import 'package:flutter/material.dart';
@@ -17,19 +18,19 @@ class Premium extends StatefulWidget {
 
 class _PremiumState extends State<Premium> with TickerProviderStateMixin {
   List tvname = [
-    'Deepam TV',
-    'Neeyam TV',
     'Madha TV',
+    'Neeyam TV',
     'Divayavani TV',
     'Captain TV',
-    'Malar TV',
     'Malaimurasu',
     'News 7',
-    'Polimer TV',
+    'Puthiyathalaimurai',
     'Sangamamam TV',
     'TV 5',
+    'Deepam TV',
+    'Polimer TV',
+    'Malar TV',
     'Vasanth TV',
-    'Puthiyathalaimurai'
   ];
   var selectedindex = 0;
   bool isHover = false;
@@ -37,30 +38,36 @@ class _PremiumState extends State<Premium> with TickerProviderStateMixin {
   Widget gridCard({required GridItem card}) => Container(
           child: Padding(
         padding: const EdgeInsets.all(5.0),
-        child: Column(children: [
-          Expanded(
-              child: InkWell(
-                  focusColor: Colors.blue,
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.circular(5),
-                      child: Image.asset(
-                        card.spaceImg,
-                      )))),
-          SizedBox(
-            height: 5.0.h,
-          ),
-          Row(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 5.0),
-                child: Text(
-                  card.spaceName,
-                  style: subcategorystyle,
-                ),
-              )
-            ],
-          ),
-        ]),
+              Expanded(
+                  child: InkWell(
+                      focusColor: Colors.blue,
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: Image.asset(
+                            card.spaceImg,
+                            height: 5.0.hp,
+                            // width: 48.0.wp,
+                            fit: BoxFit.fill,
+                          )))),
+              SizedBox(
+                height: 5.0.h,
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5.0),
+                    child: Text(
+                      card.spaceName,
+                      style: toptitleStylebold,
+                    ),
+                  )
+                ],
+              ),
+            ]),
       ));
   @override
   void initState() {
@@ -69,56 +76,56 @@ class _PremiumState extends State<Premium> with TickerProviderStateMixin {
 
   List<GridItem> card = [
     GridItem(
-      spaceImg: ('assets/premium/deepam.jpg'),
-      spaceName: 'Deepam TV',
-    ),
-    GridItem(
-      spaceImg: ('assets/premium/neeyam.jpg'),
-      spaceName: 'Neeyam TV',
-    ),
-    GridItem(
-      spaceImg: ('assets/premium/madha.jpg'),
+      spaceImg: ('assets/premium/1.jpg'),
       spaceName: 'Madha TV',
     ),
     GridItem(
-      spaceImg: ('assets/premium/divyavani.jpg'),
-      spaceName: 'Diyavani TV',
+      spaceImg: ('assets/premium/2.jpg'),
+      spaceName: 'Neeyam TV',
     ),
     GridItem(
-      spaceImg: ('assets/premium/captain.jpg'),
+      spaceImg: ('assets/premium/3.jpg'),
+      spaceName: 'Divyavani TV',
+    ),
+    GridItem(
+      spaceImg: ('assets/premium/4.jpg'),
       spaceName: 'Captain TV',
     ),
     GridItem(
-      spaceImg: ('assets/premium/malar.jpg'),
-      spaceName: 'Malar TV',
+      spaceImg: ('assets/premium/5.jpg'),
+      spaceName: 'Malai Murasu TV',
     ),
     GridItem(
-      spaceImg: ('assets/premium/malai.jpg'),
-      spaceName: 'Malaimurasu TV',
+      spaceImg: ('assets/premium/6.jpg'),
+      spaceName: 'NEWS 7',
     ),
     GridItem(
-      spaceImg: ('assets/premium/news7.jpg'),
-      spaceName: 'News 7',
+      spaceImg: ('assets/premium/7.jpg'),
+      spaceName: 'Pudhiyathalaimurai',
     ),
     GridItem(
-      spaceImg: ('assets/premium/polimer.jpg'),
+      spaceImg: ('assets/premium/8.jpg'),
+      spaceName: 'Sangamam TV',
+    ),
+    GridItem(
+      spaceImg: ('assets/premium/9.jpg'),
+      spaceName: 'TV 5',
+    ),
+    GridItem(
+      spaceImg: ('assets/premium/10.jpg'),
+      spaceName: 'Deepam TV',
+    ),
+    GridItem(
+      spaceImg: ('assets/premium/11.jpg'),
       spaceName: 'Polimer TV',
     ),
     GridItem(
-      spaceImg: ('assets/premium/sangamam.jpg'),
-      spaceName: 'sangamam TV',
+      spaceImg: ('assets/premium/12.jpg'),
+      spaceName: 'Malar TV',
     ),
     GridItem(
-      spaceImg: ('assets/premium/tv5.jpg'),
-      spaceName: 'TV5',
-    ),
-    GridItem(
-      spaceImg: ('assets/premium/vasanth.jpg'),
+      spaceImg: ('assets/premium/13.jpg'),
       spaceName: 'Vasanth TV',
-    ),
-    GridItem(
-      spaceImg: ('assets/premium/pudhiya.jpg'),
-      spaceName: 'PudhiyaThalaimuai',
     ),
   ];
   @override
@@ -127,7 +134,22 @@ class _PremiumState extends State<Premium> with TickerProviderStateMixin {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Premium Channels', style: heading),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              Container(
+                height: 18.0.h,
+                width: 1.0.w,
+                color: Colors.red[900],
+              ),
+              SizedBox(
+                width: 5.0.w,
+              ),
+              Text('Premium Channels', style: toptitleStylebold),
+            ],
+          ),
+        ),
         SizedBox(
           height: 10.0.h,
         ),
@@ -139,18 +161,21 @@ class _PremiumState extends State<Premium> with TickerProviderStateMixin {
             // physics: NeverScrollableScrollPhysics(),
             itemCount: card.length,
             itemBuilder: (BuildContext context, index) {
-              return InkWell(
-                  focusColor: Colors.blue.withOpacity(0.4),
-                  onTap: () {
-                    Get.to(PremiumVideo(
-                      index: index,
-                      name: tvname[index],
-                    ));
-                    print('clickkkk');
-                  },
-                  child: gridCard(
-                    card: card[index],
-                  ));
+              return Material(
+                color: Colors.transparent,
+                child: InkWell(
+                    focusColor: Colors.amber.withOpacity(0.2),
+                    onTap: () {
+                      Get.to(PremiumVideo(
+                        index: index,
+                        name: tvname[index],
+                      ));
+                      print('clickkkk');
+                    },
+                    child: gridCard(
+                      card: card[index],
+                    )),
+              );
             },
           ),
         ),

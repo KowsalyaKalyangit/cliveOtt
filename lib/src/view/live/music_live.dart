@@ -83,11 +83,6 @@ class _MusicLivePageState extends State<MusicLivePage>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          height: 40.0.h,
-          width: 150.0.w,
-          child: Text('Music', style: categorystyle),
-        ),
-        Container(
           height: 150.h,
           child: ListView.builder(
             shrinkWrap: true,

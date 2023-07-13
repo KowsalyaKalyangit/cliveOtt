@@ -29,30 +29,33 @@ class _MoviesPageState extends State<MoviesPage> with TickerProviderStateMixin {
   Widget gridCard({required GridItem card}) => Container(
           child: Padding(
         padding: const EdgeInsets.all(5.0),
-        child: Column(children: [
-          Expanded(
-              child: InkWell(
-                  focusColor: Colors.blue,
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.circular(5),
-                      child: Image.asset(
-                        card.spaceImg,
-                      )))),
-          SizedBox(
-            height: 5.0.h,
-          ),
-          Row(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 5.0),
-                child: Text(
-                  card.spaceName,
-                  style: subcategorystyle,
-                ),
-              )
-            ],
-          ),
-        ]),
+              Expanded(
+                  child: InkWell(
+                      focusColor: Colors.blue,
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: Image.asset(
+                            card.spaceImg,
+                          )))),
+              SizedBox(
+                height: 5.0.h,
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5.0),
+                    child: Text(
+                      card.spaceName,
+                      style: toptitleStylebold,
+                    ),
+                  )
+                ],
+              ),
+            ]),
       ));
   @override
   void initState() {
@@ -61,32 +64,30 @@ class _MoviesPageState extends State<MoviesPage> with TickerProviderStateMixin {
 
   List<GridItem> card = [
     GridItem(
-      spaceImg: ('assets/category/enter10.jpg'),
-      spaceName: 'Enter 10',
+      spaceImg: ('assets/premium/54.jpg'),
+      spaceName: 'Enterr 10',
     ),
     GridItem(
-      spaceImg: ('assets/category/classic1.jpg'),
-      spaceName: 'Movie Classic',
+      spaceImg: ('assets/premium/55.jpg'),
+      spaceName: 'B4U Movies',
     ),
     GridItem(
-      spaceImg: ('assets/category/opera.jpg'),
+      spaceImg: ('assets/premium/57.jpg'),
+      spaceName: 'B4U Kadak',
+    ),
+    GridItem(
+      spaceImg: ('assets/premium/56.jpg'),
       spaceName: 'Movie Opera',
-    ),
-    GridItem(
-      spaceImg: ('assets/category/8.jpg'),
-      spaceName: 'B4U kadak',
-    ),
-    GridItem(
-      spaceImg: ('assets/category/b4umovies.jpg'),
-      spaceName: 'B4U movies',
     ),
   ];
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 1000.0.h,
+      width: 1000.w,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/category/background.png"),
+          image: AssetImage("assets/images/bgbg.jpg"),
           fit: BoxFit.cover,
         ),
       ),
@@ -96,10 +97,21 @@ class _MoviesPageState extends State<MoviesPage> with TickerProviderStateMixin {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              height: 40.0.h,
-              width: 150.0.w,
-              child: Text('Hindi Movies', style: categorystyle),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Container(
+                    height: 18.0.h,
+                    width: 1.0.w,
+                    color: Colors.red[900],
+                  ),
+                  SizedBox(
+                    width: 5.0.w,
+                  ),
+                  Text('Hindi Movies', style: toptitleStylebold),
+                ],
+              ),
             ),
             Container(
               height: 150.h,
@@ -109,18 +121,21 @@ class _MoviesPageState extends State<MoviesPage> with TickerProviderStateMixin {
                 // physics: NeverScrollableScrollPhysics(),
                 itemCount: card.length,
                 itemBuilder: (BuildContext context, index) {
-                  return InkWell(
-                      focusColor: Colors.blue.withOpacity(0.4),
-                      onTap: () {
-                        Get.to(MovieVideo(
-                          index: index,
-                          name: tvname[index],
-                        ));
-                        print('clickkkk');
-                      },
-                      child: gridCard(
-                        card: card[index],
-                      ));
+                  return Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                        focusColor: Colors.blue.withOpacity(0.4),
+                        onTap: () {
+                          Get.to(MovieVideo(
+                            index: index,
+                            name: tvname[index],
+                          ));
+                          print('clickkkk');
+                        },
+                        child: gridCard(
+                          card: card[index],
+                        )),
+                  );
                 },
               ),
             ),
