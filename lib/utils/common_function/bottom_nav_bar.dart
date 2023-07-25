@@ -70,13 +70,14 @@ class BottomNavyBar extends StatelessWidget {
     final bgColor = backgroundColor ?? Theme.of(context).bottomAppBarColor;
 
     return Material(
+      color: black1,
       elevation: 5,
-      borderRadius: BorderRadius.circular(30),
+      borderRadius: BorderRadius.circular(10),
       child: Container(
         width: 95.00.wp,
         decoration: BoxDecoration(
-          color: black1,
-          borderRadius: BorderRadius.circular(30),
+          color: black,
+          borderRadius: BorderRadius.circular(10),
           boxShadow: [
             if (showElevation)
               const BoxShadow(

@@ -56,8 +56,8 @@ class _CategoryLikeVideosState extends State<CategoryLikeVideos> {
                       borderRadius: BorderRadius.circular(10),
                       child: Image.asset(
                         movieList[index],
-                        height: 15.0.hp,
-                        width: 30.0.wp,
+                        height: 20.0.hp,
+                        width: 35.0.wp,
                         // width: 130.0.w,
                         fit: BoxFit.fill,
                       ),

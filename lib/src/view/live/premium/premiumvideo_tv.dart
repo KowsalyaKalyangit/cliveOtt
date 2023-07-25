@@ -10,23 +10,31 @@ import 'package:video_player/video_player.dart';
 import '../../../../utils/colors.dart';
 import '../../../../utils/landscape.dart';
 
-class MovieVideo extends StatefulWidget {
-  MovieVideo({super.key, this.index, this.name});
+class PremiumTVVideo extends StatefulWidget {
+  PremiumTVVideo({super.key, this.index, this.name});
   final int? index;
   final String? name;
 
   @override
-  State<MovieVideo> createState() => _MovieVideoState();
+  State<PremiumTVVideo> createState() => _PremiumTVVideoState();
 }
 
-class _MovieVideoState extends State<MovieVideo> {
+class _PremiumTVVideoState extends State<PremiumTVVideo> {
   VideoPlayerController? _controller;
   var url = [
-    'http://sabot.instastream.in:8885/ENTER_10_MO/ENTER_10_MO.m3u8',
-    'http://sabot.instastream.in:8888/MUSIC/MOCLASSIC.m3u8',
-    'http://sabot.instastream.in:8888/MOVIE/MO1.m3u8',
-    'https://livectv.phando.com/8060/playlist.m3u8',
-    'https://livectv.phando.com/8004/playlist.m3u8'
+    'https://60e68b19dd194.streamlock.net:55/madhatv/madhatv.stream_HDp/playlist.m3u8',
+    'https://60e68b19dd194.streamlock.net:55/neyam/neyamhd/playlist.m3u8',
+    'https://60e68b19dd194.streamlock.net:55/divyavani/divyavani.stream_HDp/playlist.m3u8',
+    'https://60e68b19dd194.streamlock.net:55/ott/captain.stream_HDp/playlist.m3u8',
+    'https://60e68b19dd194.streamlock.net:55/ott/murasu.stream_HDp/playlist.m3u8',
+    'https://60e68b19dd194.streamlock.net:55/ott/news7.stream_HDp/playlist.m3u8',
+    'https://60e68b19dd194.streamlock.net:55/ott/puthiyathalimurai.stream_HDp/playlist.m3u8',
+    'https://60e68b19dd194.streamlock.net:55/ott/sangamam.stream_HDp/playlist.m3u8',
+    'https://60e68b19dd194.streamlock.net:55/ott/tv5.stream_HDp/playlist.m3u8',
+    'http://10.8.0.2:1935/deepamtv/deepamhd/playlist.m3u8',
+    'https://60e68b19dd194.streamlock.net:55/ott/polimer.stream_HDp/playlist.m3u8',
+    'https://60e68b19dd194.streamlock.net:55/ott/malar.stream_HDp/playlist.m3u8',
+    'https://60e68b19dd194.streamlock.net:55/ott/vasanth.stream_HDp/playlist.m3u8',
   ];
 
   List videosfiles = [
@@ -45,7 +53,7 @@ class _MovieVideoState extends State<MovieVideo> {
       _buttonClickCount++;
       if (_buttonClickCount % 1 == 0) {
         _showWidget = true;
-        Timer(Duration(seconds: 10), () {
+        Timer(Duration(seconds: 5), () {
           setState(() {
             _showWidget = false;
           });
@@ -57,7 +65,11 @@ class _MovieVideoState extends State<MovieVideo> {
   @override
   void initState() {
     super.initState();
-    func();
+    Timer(Duration(milliseconds: 10), () {
+      setState(() {
+        _handleButtonClick();
+      });
+    });
 
     _controller = VideoPlayerController.network(url[widget.index!])
       ..initialize().then((_) {
@@ -66,14 +78,6 @@ class _MovieVideoState extends State<MovieVideo> {
           _controller!.play();
         });
       });
-  }
-
-  func() async {
-    Timer(Duration(milliseconds: 10), () {
-      setState(() {
-        _handleButtonClick();
-      });
-    });
   }
 
   bool _isButtonPressed = false;

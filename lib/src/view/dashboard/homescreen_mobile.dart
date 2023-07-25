@@ -1,17 +1,10 @@
 import 'package:cliveott/src/controller/force_update_controller.dart';
 import 'package:cliveott/src/controller/login_controller.dart';
 import 'package:cliveott/src/view/dashboard/homepage.dart';
-import 'package:cliveott/src/view/dashboard/image_slider.dart';
-import 'package:cliveott/src/view/dashboard/sliding_banner.dart';
-import 'package:cliveott/src/view/live/lifesstyle/lifestyle_page.dart';
-import 'package:cliveott/src/view/live/live_channels_only.dart';
+
 import 'package:cliveott/src/view/live/livetv_category/livetv_category.dart';
 import 'package:cliveott/src/view/live/movies/movie.dart';
-import 'package:cliveott/src/view/live/music_live.dart';
-import 'package:cliveott/src/view/live/news_page.dart';
-import 'package:cliveott/src/view/live/others_page.dart';
-import 'package:cliveott/src/view/live/premium/premium.dart';
-import 'package:cliveott/src/view/subscribe/subscribe_home_page.dart';
+
 import 'package:cliveott/src/view/subscribe/subscription_page.dart';
 import 'package:cliveott/utils/colors.dart';
 import 'package:cliveott/utils/common_function/bottom_nav_bar.dart';
@@ -22,7 +15,6 @@ import 'package:cliveott/utils/textstyles.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:is_tv/is_tv.dart';

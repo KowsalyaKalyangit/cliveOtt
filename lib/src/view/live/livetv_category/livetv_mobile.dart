@@ -1,4 +1,4 @@
-import 'package:chewie/chewie.dart';
+ 
 import 'package:cliveott/src/view/category/category_like_videos.dart';
 import 'package:cliveott/utils/colors.dart';
 import 'package:cliveott/utils/responsive.dart';
@@ -10,7 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:video_player/video_player.dart';
-import 'package:appinio_video_player/appinio_video_player.dart';
+ 
 import 'package:flick_video_player/flick_video_player.dart';
 
 class MobileCategoryVideo extends StatefulWidget {
@@ -73,10 +73,36 @@ class _MobileCategoryVideoState extends State<MobileCategoryVideo> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: 25.0.hp,
+                height: 35.0.hp,
                 child: FlickVideoPlayer(
                   //  flickVideoWithControls: FlickPortraitControls(),
+
                   flickVideoWithControls: FlickVideoWithControls(
+                    //  videoFit: BoxFit.fill,
+                    aspectRatioWhenLoading: 1,
+                    playerErrorFallback: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.error_outline,
+                            size: 30,
+                            color: Colors.grey,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'This video is unavailable..!',
+                            style: toptitleStyle,
+                          ),
+                        ],
+                      ),
+                    ),
+                    playerLoadingFallback: Center(
+                        child: CircularProgressIndicator(
+                      color: screenbackground,
+                    )),
                     controls: FlickPortraitControls(
                       progressBarSettings: FlickProgressBarSettings(
                           height: 0, curveRadius: 0, handleRadius: 0),
@@ -89,17 +115,15 @@ class _MobileCategoryVideoState extends State<MobileCategoryVideo> {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 2.0.hp,
-              ),
               Padding(
-                padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                padding:
+                    const EdgeInsets.only(left: 20.0, right: 10.0, top: 10),
                 child: Text(
                   widget.tvtitle.toString(),
                   style: GoogleFonts.ibmPlexSans(
                       textStyle: TextStyle(
                           letterSpacing: 0.2,
-                          fontSize: 20.00,
+                          fontSize: 15.00,
                           color: screenbackground,
                           fontWeight: FontWeight.w600)),
                 ),
@@ -107,106 +131,85 @@ class _MobileCategoryVideoState extends State<MobileCategoryVideo> {
               SizedBox(
                 height: 1.0.hp,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                child: Row(
-                  children: [
-                    Container(
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.remove_red_eye,
-                            color: screenbackground,
-                            size: 20,
-                          ),
-                          Text(
-                            '17 views',
-                            style: categorytext,
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: 5.w,
-                    ),
-                    Text(
-                      '|',
-                      style: toptitleStylebold,
-                    ),
-                    SizedBox(
-                      width: 5.w,
-                    ),
-                    Container(
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.access_time_rounded,
-                            color: screenbackground,
-                          ),
-                          Text(
-                            '1hr 51 mins',
-                            style: toptitleStyle,
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: 5.w,
-                    ),
-                    Text(
-                      '|',
-                      style: toptitleStylebold,
-                    ),
-                    SizedBox(
-                      width: 5.w,
-                    ),
-                    Container(
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            'assets/images/imdb.png',
-                            width: 5.0.hp,
-                          ),
-                          // Text(
-                          //   '4.8',
-                          //   style: toptitleStyle,
-                          // ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    Text(
-                      '|',
-                      style: toptitleStylebold,
-                    ),
-                    SizedBox(
-                      width: 40.w,
-                    ),
-                    Container(
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            radius: 15,
-                            backgroundColor: Colors.white.withOpacity(0.2),
-                            child: Text(
-                              '16 +',
-                              style: datetimecolor,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: 5.w,
-                    ),
-                  ],
+              Row(children: [
+                SizedBox(
+                  width: 5.0.wp,
                 ),
-              ),
-              SizedBox(
-                height: 2.0.hp,
-              ),
+                Container(
+                  height: 4.0.hp,
+                  width: 15.0.wp,
+                  decoration: BoxDecoration(
+                      color: Color(0xff363a3a),
+                      borderRadius: BorderRadius.circular(5)),
+                  child: Center(
+                    child: Text(
+                      'Action',
+                      style: datetimecolor,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 2.0.wp,
+                ),
+                Container(
+                  height: 4.0.hp,
+                  width: 25.0.wp,
+                  decoration: BoxDecoration(
+                      color: Color(0xff363a3a),
+                      borderRadius: BorderRadius.circular(5)),
+                  child: Center(
+                    child: Text(
+                      'Adventure',
+                      style: datetimecolor,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 2.0.wp,
+                ),
+                Container(
+                  height: 4.0.hp,
+                  width: 15.0.wp,
+                  decoration: BoxDecoration(
+                      color: Color(0xff363a3a),
+                      borderRadius: BorderRadius.circular(5)),
+                  child: Center(
+                    child: Text(
+                      '2H 45M',
+                      style: datetimecolor,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 2.0.wp,
+                ),
+                Container(
+                  height: 4.0.hp,
+                  width: 13.0.wp,
+                  decoration: BoxDecoration(
+                      color: Color(0xff363a3a),
+                      borderRadius: BorderRadius.circular(5)),
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Icon(
+                          Icons.star,
+                          color: Colors.yellow[600],
+                          size: 15,
+                        ),
+                        Text(
+                          '8.7',
+                          style: datetimecolor,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 2.0.hp,
+                ),
+              ]),
               addimage.isEmpty
                   ? Container(
                       height: 0.0.hp,
@@ -251,12 +254,61 @@ class _MobileCategoryVideoState extends State<MobileCategoryVideo> {
                 height: 1.0.hp,
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding:
+                    const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
                 child: Text(
                   '''The Madrigals are an extraordinary family who live hidden in the mountains of Colombia in a charmed place called the Encanto. The magic of the Encanto has blessed every child in the family with a unique gift -- every child except Mirabel.  
                ''',
-                  style: categorytext,
+                  style: forminputstylefourteen,
                 ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Column(
+                    children: [
+                      Icon(
+                        Icons.add,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                      Text(
+                        'My List',
+                        style: toptitleStyle,
+                      )
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.thumb_up_outlined,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                      Text(
+                        'Rate',
+                        style: toptitleStyle,
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Icon(
+                        Icons.share_outlined,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                      Text(
+                        'share',
+                        style: toptitleStyle,
+                      )
+                    ],
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 2.0.hp,
               ),
               Container(
                 height: 0.50.hp,
@@ -288,19 +340,3 @@ class _MobileCategoryVideoState extends State<MobileCategoryVideo> {
         ));
   }
 }
-
-// String videoUrlLandscape =
-//     "https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4";
-// String videoUrlPortrait =
-//     'https://assets.mixkit.co/videos/preview/mixkit-a-girl-blowing-a-bubble-gum-at-an-amusement-park-1226-large.mp4';
-// String longVideo =
-//     "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
-
-// String video720 =
-//     "https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_10mb.mp4";
-
-// String video480 =
-//     "https://www.sample-videos.com/video123/mp4/480/big_buck_bunny_480p_10mb.mp4";
-
-// String video240 =
-//     "https://www.sample-videos.com/video123/mp4/240/big_buck_bunny_240p_10mb.mp4";

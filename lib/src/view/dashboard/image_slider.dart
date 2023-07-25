@@ -1,4 +1,5 @@
-import 'package:cliveott/src/view/dashboard/mobile_app/slider.dart';
+import 'package:cliveott/src/view/dashboard/mobile_app/mobileapp_slider.dart';
+ 
 import 'package:cliveott/src/view/dashboard/sliding_banner.dart';
 import 'package:flutter/material.dart';
 

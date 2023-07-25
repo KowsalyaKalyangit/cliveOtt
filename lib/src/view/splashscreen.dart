@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:cliveott/src/view/dashboard/mobile_app/homescreen-mobile.dart';
 import 'package:cliveott/src/view/login/login_page.dart';
 import 'package:cliveott/utils/responsive.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +64,7 @@ class _SplashScreenState extends State<SplashScreen> {
               return FadeTransition(
                 opacity:
                     animation, // CurvedAnimation(parent: animation, curve: Curves.elasticInOut),
-                child: _isTV! ? HomeScreen() : HomeScreenMobile(),
+                child: HomeScreen(),
               );
             },
           ),

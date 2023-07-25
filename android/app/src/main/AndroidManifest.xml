@@ -4,6 +4,7 @@
 <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
  
  
+ 
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="cliveott"
@@ -32,6 +33,7 @@
               android:name="io.flutter.embedding.android.SplashScreenDrawable"
               android:resource="@drawable/launch_background"
               />
+            
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

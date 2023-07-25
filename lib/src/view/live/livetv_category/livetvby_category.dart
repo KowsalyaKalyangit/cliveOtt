@@ -1,9 +1,12 @@
-import 'package:cliveott/src/view/dashboard/mobile_app/videostream/category_videostream.dart';
+import 'package:cliveott/src/view/live/livetv_category/livetv_mobile.dart';
+import 'package:cliveott/src/view/live/livetv_category/livetv_tv_video.dart';
 import 'package:cliveott/utils/colors.dart';
 import 'package:cliveott/utils/responsive.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:is_tv/is_tv.dart';
 
 import '../../../../utils/textstyles.dart';
 import '../../../controller/livetvby_category_controller.dart';
@@ -21,9 +24,29 @@ class _LiveTvByCategoryScreenState extends State<LiveTvByCategoryScreen> {
       Get.put(LiveTvByCategoryController());
   @override
   void initState() {
+    initPlatformState();
     liveTvByCategoryController.liveTvBycategoryController(
         category_id: widget.categoryid.toString());
     super.initState();
+  }
+
+  bool? _isTV = false;
+  final _isTVPlugin = IsTV();
+
+  Future<void> initPlatformState() async {
+    bool? isTV;
+
+    try {
+      isTV = await _isTVPlugin.check() ?? false;
+    } on PlatformException {
+      isTV = false;
+    }
+
+    if (!mounted) return;
+
+    setState(() {
+      _isTV = isTV ?? false;
+    });
   }
 
   @override
@@ -64,7 +87,7 @@ class _LiveTvByCategoryScreenState extends State<LiveTvByCategoryScreen> {
                         .getcategory[0].videoStreamingApp.length,
                     gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                         maxCrossAxisExtent: 180,
-                        childAspectRatio: 3.90 / 3,
+                        childAspectRatio: 3.50 / 3,
                         crossAxisSpacing: 10,
                         mainAxisSpacing: 0),
                     itemBuilder: (BuildContext context, int index) {
@@ -75,12 +98,14 @@ class _LiveTvByCategoryScreenState extends State<LiveTvByCategoryScreen> {
                         child: InkWell(
                           focusColor: Colors.blue.withOpacity(0.2),
                           onTap: () {
-                            // Get.to(CategoryVideos(
-                            //     tvid: categorydata.tvId.toString(),
-                            //     tvurl: categorydata.tvUrl.toString()));
-                            // Get.to(VideoApp());
-                            Get.to(MobileCategoryVideo(
-                                tvurl: categorydata.tvUrl.toString(),tvtitle:categorydata.tvTitle.toString()));
+                            _isTV!
+                                ? Get.to(LiveTvTVVideo(
+                                    index: index,
+                                    name: categorydata.tvTitle.toString(),
+                                  ))
+                                : Get.to(MobileCategoryVideo(
+                                    tvurl: categorydata.tvUrl.toString(),
+                                    tvtitle: categorydata.tvTitle.toString()));
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),

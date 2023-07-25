@@ -1,10 +1,13 @@
+import 'package:cliveott/src/view/live/movies/movie_mobile.dart';
 import 'package:cliveott/src/view/live/movies/movies_video.dart';
 import 'package:cliveott/utils/colors.dart';
 
 import 'package:cliveott/utils/textstyles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:is_tv/is_tv.dart';
 
 import '../../dashboard/clive_videos.dart';
 
@@ -25,6 +28,24 @@ class _MoviesPageState extends State<MoviesPage> with TickerProviderStateMixin {
   ];
   var selectedindex = 0;
   bool isHover = false;
+  bool? _isTV = false;
+  final _isTVPlugin = IsTV();
+
+  Future<void> initPlatformState() async {
+    bool? isTV;
+
+    try {
+      isTV = await _isTVPlugin.check() ?? false;
+    } on PlatformException {
+      isTV = false;
+    }
+
+    if (!mounted) return;
+
+    setState(() {
+      _isTV = isTV ?? false;
+    });
+  }
 
   Widget gridCard({required GridItem card}) => Container(
           child: Padding(
@@ -59,6 +80,7 @@ class _MoviesPageState extends State<MoviesPage> with TickerProviderStateMixin {
       ));
   @override
   void initState() {
+    initPlatformState();
     super.initState();
   }
 
@@ -124,13 +146,21 @@ class _MoviesPageState extends State<MoviesPage> with TickerProviderStateMixin {
                   return Material(
                     color: Colors.transparent,
                     child: InkWell(
+                        // autofocus: true,
                         focusColor: Colors.blue.withOpacity(0.4),
                         onTap: () {
-                          Get.to(MovieVideo(
-                            index: index,
-                            name: tvname[index],
-                          ));
-                          print('clickkkk');
+                          setState(() {
+                            _isTV!
+                                ? Get.to(MovieVideo(
+                                    index: index,
+                                    name: tvname[index],
+                                  ))
+                                : Get.to(MovieMobile(
+                                    index: index,
+                                    name: tvname[index],
+                                  ));
+                            print('clickkkk');
+                          });
                         },
                         child: gridCard(
                           card: card[index],

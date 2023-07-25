@@ -7,8 +7,6 @@ import 'package:get/get.dart';
 import '../../../utils/textstyles.dart';
 import '../category/category_videos.dart';
 
-import '../category/categoryone_list.dart';
-
 class Categorylist extends StatefulWidget {
   const Categorylist({super.key});
 
@@ -28,21 +26,29 @@ class _CategorylistState extends State<Categorylist> {
     'https://cherritech.us/ott/upload/source/poster-do.jpg',
     'https://cherritech.us/ott/upload/source/thumbnail/encanto.jpg',
   ];
+  // var cateList = [
+  //   'https://cherritech.us/ott/upload/source/Ms.Marvel.png',
+  //   'https://cherritech.us/ott/upload/source/bean vs bee.jpg',
+  //   'https://cherritech.us/ott/upload/source/vikings.jpg',
+  //   'https://cherritech.us/ott/upload/source/Ms.Marvel.png',
+  //   'https://cherritech.us/ott/upload/source/bean vs bee.jpg',
+  //   'https://cherritech.us/ott/upload/source/vikings.jpg',
+  // ];
   var cateList = [
-    'https://cherritech.us/ott/upload/source/Ms.Marvel.png',
-    'https://cherritech.us/ott/upload/source/bean vs bee.jpg',
-    'https://cherritech.us/ott/upload/source/vikings.jpg',
-    'https://cherritech.us/ott/upload/source/Ms.Marvel.png',
-    'https://cherritech.us/ott/upload/source/bean vs bee.jpg',
-    'https://cherritech.us/ott/upload/source/vikings.jpg',
+    'assets/slider/upcoming1.jpg',
+    'assets/slider/upcoming2.jpg',
+    'assets/slider/upcoming3.jpg',
+    'assets/slider/upcoming4.jpg',
+    'assets/slider/upcoming5.jpg',
+    'assets/slider/upcoming6.jpg',
   ];
   var cateNameList = [
-    'Ms. Marvel',
-    'Man vs Bee',
-    'Vikings',
-    'Ms. Marvel',
-    'Man vs Bee',
-    'Vikings',
+    'Fantasy',
+    'Thriller',
+    'Crime',
+    'Action',
+    'Drama',
+    'SCI-FI',
   ];
   var movieNameList = [
     'Doctor Stranger',
@@ -63,7 +69,7 @@ class _CategorylistState extends State<Categorylist> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          height: 160.0.h,
+          height: 250.0.h,
           // width: 1000.0.w,
           child: ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -80,9 +86,9 @@ class _CategorylistState extends State<Categorylist> {
                         padding: const EdgeInsets.all(5.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
-                          child: Image.network(cateList[index],
-                              height: 120.0.h,
-                              width: 180.0.w,
+                          child: Image.asset(cateList[index],
+                              height: 200.0.h,
+                              width: 130.0.w,
                               fit: BoxFit.fill),
                         ),
                       ),
@@ -132,7 +138,7 @@ class _CategorylistState extends State<Categorylist> {
                 return InkWell(
                   focusColor: Colors.blue,
                   onTap: () {
-                    Get.to(CategoryVideosone(index: index));
+                    //Get.to(CategoryVideosone(index: index));
                   },
                   child: Container(
                     child: Column(

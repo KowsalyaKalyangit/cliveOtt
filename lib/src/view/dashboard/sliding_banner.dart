@@ -1,8 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cliveott/src/view/dashboard/slider_videos.dart';
 import 'package:cliveott/utils/colors.dart';
 import 'package:cliveott/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:is_tv/is_tv.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
@@ -26,12 +28,11 @@ class _SlidingBannerAutoState extends State<SlidingBannerAuto> {
   }
 
   final List<String> imgList = [
-    'assets/category/rajini.jpg',
-    'assets/category/rajini1.jpg',
-    'assets/category/rajini2.jpg',
-    'assets/category/rajini3.jpg',
-    'assets/category/rajini4.jpg',
-    'assets/category/rajini5.jpg'
+    'assets/images/b1.jpg',
+    'assets/images/b2.jpg',
+    'assets/images/b3.jpg',
+    'assets/images/b4.jpg',
+    'assets/images/b5.jpg'
   ];
   // final List<String> imgList = [
   //   'assets/slider/12.jpg',
@@ -96,25 +97,34 @@ class _SlidingBannerAutoState extends State<SlidingBannerAuto> {
           ),
         ),
         Expanded(
+            child: InkWell(
+          onTap: () {
+            Get.to(SliderVideos(
+              index: _current,
+            ));
+          },
+          child: Container(
             child: CarouselSlider(
-          items: imageSliders,
-          carouselController: carouselController,
+              items: imageSliders,
+              carouselController: carouselController,
 
-          //Slider Container properties
-          options: CarouselOptions(
-              height: _isTV! ? 400.0 : 180,
-              enlargeCenterPage: true,
-              autoPlay: true,
-              aspectRatio: _isTV! ? 16 / 9 : 4 / 3,
-              autoPlayCurve: Curves.fastOutSlowIn,
-              enableInfiniteScroll: true,
-              autoPlayAnimationDuration: Duration(milliseconds: 800),
-              viewportFraction: 0.8,
-              onPageChanged: (index, reason) {
-                setState(() {
-                  _current = index;
-                });
-              }),
+              //Slider Container properties
+              options: CarouselOptions(
+                  height: _isTV! ? 400.0 : 180,
+                  enlargeCenterPage: true,
+                  autoPlay: true,
+                  aspectRatio: _isTV! ? 16 / 9 : 4 / 3,
+                  autoPlayCurve: Curves.fastOutSlowIn,
+                  enableInfiniteScroll: true,
+                  autoPlayAnimationDuration: Duration(milliseconds: 800),
+                  viewportFraction: 0.8,
+                  onPageChanged: (index, reason) {
+                    setState(() {
+                      _current = index;
+                    });
+                  }),
+            ),
+          ),
         )),
         Material(
           color: Colors.transparent,

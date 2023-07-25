@@ -3,10 +3,9 @@ import 'package:get/get.dart';
 
 import '../../controller/livetv_category_controller.dart';
  
-import 'lifesstyle/lifestyle_page.dart';
-import 'music_live.dart';
+ 
 import 'news_page.dart';
-import 'others_page.dart';
+ 
 
 class LiveChannels extends StatefulWidget {
   const LiveChannels({super.key});
@@ -40,9 +39,9 @@ class _LiveChannelsState extends State<LiveChannels> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // EntertainmentPage(),
-              MusicLivePage(),
+              
               NewsPage(),
-              OthersPage(),
+            
             ],
           ),
         ),

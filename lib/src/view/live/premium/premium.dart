@@ -1,13 +1,16 @@
-import 'package:cliveott/src/view/live/music/music_videos.dart';
+import 'package:cliveott/src/view/live/premium/premium_appbar.dart';
 import 'package:cliveott/src/view/live/premium/premium_video.dart';
+import 'package:cliveott/src/view/live/premium/premiumvideo_tv.dart';
 
 import 'package:cliveott/utils/colors.dart';
 import 'package:cliveott/utils/responsive.dart';
 
 import 'package:cliveott/utils/textstyles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:is_tv/is_tv.dart';
 
 class Premium extends StatefulWidget {
   const Premium({super.key});
@@ -34,6 +37,24 @@ class _PremiumState extends State<Premium> with TickerProviderStateMixin {
   ];
   var selectedindex = 0;
   bool isHover = false;
+  bool? _isTV = false;
+  final _isTVPlugin = IsTV();
+
+  Future<void> initPlatformState() async {
+    bool? isTV;
+
+    try {
+      isTV = await _isTVPlugin.check() ?? false;
+    } on PlatformException {
+      isTV = false;
+    }
+
+    if (!mounted) return;
+
+    setState(() {
+      _isTV = isTV ?? false;
+    });
+  }
 
   Widget gridCard({required GridItem card}) => Container(
           child: Padding(
@@ -71,6 +92,7 @@ class _PremiumState extends State<Premium> with TickerProviderStateMixin {
       ));
   @override
   void initState() {
+    initPlatformState();
     super.initState();
   }
 
@@ -166,11 +188,20 @@ class _PremiumState extends State<Premium> with TickerProviderStateMixin {
                 child: InkWell(
                     focusColor: Colors.amber.withOpacity(0.2),
                     onTap: () {
-                      Get.to(PremiumVideo(
-                        index: index,
-                        name: tvname[index],
-                      ));
-                      print('clickkkk');
+                      setState(() {
+                        _isTV!
+                            ? Get.to(PremiumTVVideo(
+                                index: index,
+                                name: tvname[index],
+                              ))
+                            : Get.to(PremiumVideo(
+                                index: index,
+                                name: tvname[index],
+                              ));
+                        //   Get.to(
+                        //       PremiumAppBar(index: index, name: tvname[index]));
+                        //   print('clickkkk');
+                      });
                     },
                     child: gridCard(
                       card: card[index],

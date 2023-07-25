@@ -2,43 +2,35 @@ import 'package:cliveott/src/view/category/category_like_videos.dart';
 import 'package:cliveott/utils/colors.dart';
 import 'package:cliveott/utils/responsive.dart';
 import 'package:cliveott/utils/textstyles.dart';
-
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import 'package:video_player/video_player.dart';
-
+import 'package:video_player/video_player.dart'; 
 import 'package:flick_video_player/flick_video_player.dart';
 
-class PremiumVideo extends StatefulWidget {
-  const PremiumVideo({super.key, this.index, this.name});
+class MovieMobile extends StatefulWidget {
+  const MovieMobile({super.key, this.index, this.name});
   final int? index;
   final String? name;
 
   @override
-  State<PremiumVideo> createState() => _PremiumVideoState();
+  State<MovieMobile> createState() => _MovieMobileState();
 }
 
-class _PremiumVideoState extends State<PremiumVideo> {
+class _MovieMobileState extends State<MovieMobile> {
   FlickManager? flickManager;
   List addimage = [
     'assets/images/ads2.jpg',
   ];
   var url = [
-    'https://60e68b19dd194.streamlock.net:55/madhatv/madhatv.stream_HDp/playlist.m3u8',
-    'https://60e68b19dd194.streamlock.net:55/neyam/neyamhd/playlist.m3u8',
-    'https://60e68b19dd194.streamlock.net:55/divyavani/divyavani.stream_HDp/playlist.m3u8',
-    'https://60e68b19dd194.streamlock.net:55/ott/captain.stream_HDp/playlist.m3u8',
-    'https://60e68b19dd194.streamlock.net:55/ott/murasu.stream_HDp/playlist.m3u8',
-    'https://60e68b19dd194.streamlock.net:55/ott/news7.stream_HDp/playlist.m3u8',
-    'https://60e68b19dd194.streamlock.net:55/ott/puthiyathalimurai.stream_HDp/playlist.m3u8',
-    'https://60e68b19dd194.streamlock.net:55/ott/sangamam.stream_HDp/playlist.m3u8',
-    'https://60e68b19dd194.streamlock.net:55/ott/tv5.stream_HDp/playlist.m3u8',
-    'http://10.8.0.2:1935/deepamtv/deepamhd/playlist.m3u8',
-    'https://60e68b19dd194.streamlock.net:55/ott/polimer.stream_HDp/playlist.m3u8',
-    'https://60e68b19dd194.streamlock.net:55/ott/malar.stream_HDp/playlist.m3u8',
-    'https://60e68b19dd194.streamlock.net:55/ott/vasanth.stream_HDp/playlist.m3u8',
+    'http://sabot.instastream.in:8885/ENTER_10_MO/ENTER_10_MO.m3u8',
+    'http://sabot.instastream.in:8888/MUSIC/MOCLASSIC.m3u8',
+    'http://sabot.instastream.in:8888/MOVIE/MO1.m3u8',
+    'https://livectv.phando.com/8060/playlist.m3u8',
+    'https://livectv.phando.com/8004/playlist.m3u8'
   ];
   @override
   void initState() {
@@ -350,19 +342,3 @@ class _PremiumVideoState extends State<PremiumVideo> {
         ));
   }
 }
-
-// String videoUrlLandscape =
-//     "https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4";
-// String videoUrlPortrait =
-//     'https://assets.mixkit.co/videos/preview/mixkit-a-girl-blowing-a-bubble-gum-at-an-amusement-park-1226-large.mp4';
-// String longVideo =
-//     "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
-
-// String video720 =
-//     "https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_10mb.mp4";
-
-// String video480 =
-//     "https://www.sample-videos.com/video123/mp4/480/big_buck_bunny_480p_10mb.mp4";
-
-// String video240 =
-//     "https://www.sample-videos.com/video123/mp4/240/big_buck_bunny_240p_10mb.mp4";
